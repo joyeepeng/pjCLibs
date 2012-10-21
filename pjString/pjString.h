@@ -1,5 +1,5 @@
 /*******************************************************************************
-* File Name: pjPath.h
+* File Name: pjString.h
 * Author: Joyee Peng
 * Email: joyee.peng@gmail.com
 * Github: https://github.com/joyeepeng
@@ -7,28 +7,24 @@
 * History:
 	2012-10-20 initial release version
 *******************************************************************************/
+#ifndef __PJSTRING_H__
+#define __PJSTRING_H__
 
-#ifndef __PJPATH_H__
-#define __PJPATH_H__
-
-#define PJPATH_VERSION_PATCH	1
-#define PJPATH_VERSION_MINOR	0
-#define PJPATH_VERSION_MAJOR	0
+#define PJSTRING_VERSION_PATCH		1
+#define PJSTRING_VERSION_MINOR		0
+#define PJSTRING_VERSION_MAJOR		0
 
 /*******************************************************************************
 * Version Control
 *******************************************************************************/
-long int pjPath_GetVersion( void );
-int pjPath_GetVersionPatch( void );
-int pjPath_GetVersionMinor( void );
-int pjPath_GetVersionMajor( void );
-
+long int pjString_GetVersion( void );
+int pjString_GetVersionPatch( void );
+int pjString_GetVersionMinor( void );
+int pjString_GetVersionMajor( void );
 /*******************************************************************************
 * Public Methods
 *******************************************************************************/
-int pjPath_GetFileExtension( char* path, char* fileExt );
-int pjPath_GetDirectoryName( char* path, char* directoryName );
-int pjPath_GetFileName( char* path, char* fileName );
-int pjPath_GetDriveName( char* path, char* drive );
+int pjString_Find( char* string, char findChar );
+int pjString_Length( char* string );
 
 #endif
