@@ -36,9 +36,31 @@ int main(int argc, char *argv[])
 #endif
 
 #ifdef __DEBUG_PJSTRING__
-	char* testString = "abcd1389";
+	char* testString = "abcd1389c";
 	printf("Length: %d\n", pjString_Length(testString) );
-	printf("Find: %d\n", pjString_Find(testString,'a'));
+	printf("Find: %d\n", pjString_Find(testString,'1'));
+	
+	char* testStr = (char*)malloc(sizeof(char)*strlen(testString));
+	memset(testStr,'\0',sizeof(char)*strlen(testString));
+	pjString_Copy( testStr, testString );
+	printf("Copy: %s\n", testStr);
+	pjString_Replace( testStr, 'c', 'e' );
+	printf("Replace: %s\n", testStr );
+	pjString_CopyLimited( testStr, testString, pjString_Length(testString)-3);
+	printf("CopyLimited: %s\n", testStr);
+	pjString_Append( testStr, "peng" );
+	printf("Append: %s\n", testStr );
+	char* subStr = (char*)malloc(sizeof(char)*5);
+	pjString_Substring(testStr,2,5,subStr);
+	printf("Substring: %s\n", subStr);
+	int* find = (int*)malloc(sizeof(int)*5);
+	int num = pjString_FindAll( testString, 'c', find );
+	int i = 0;
+	for(i=0;i<num;i++)
+		printf(" %d ", find[i]);
+	free(find);
+	free(subStr);
+	free(testStr);
 #endif
 	
 	system("pause");

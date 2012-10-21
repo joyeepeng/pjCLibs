@@ -25,6 +25,12 @@ int pjString_GetVersionMajor( void );
 * Public Methods
 *******************************************************************************/
 int pjString_Find( char* string, char findChar );
+int pjString_FindAll( char* string, char findChar, int* pos );
+int pjString_Replace( char* string, char oldChar, char newChar );
 int pjString_Length( char* string );
+int pjString_Copy( char* string, char* fromString );
+int pjString_CopyLimited( char* string, char* fromString, int length );
+int pjString_Append( char* string, char* append );
+int pjString_Substring( char* string, int start, int length, char* substring );
 
 #endif
