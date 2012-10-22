@@ -16,26 +16,26 @@
             8-bits 8-bits 8-bits
 *******************************************************************************/
                                         /***************************************
-										* pjPath_GetVersionPatch
-										***************************************/
+                                        * pjPath_GetVersionPatch
+                                        ***************************************/
 int pjPath_GetVersionPatch( void ){
 	return PJPATH_VERSION_PATCH;	
 }
-										/***************************************
-										* pjPath_GetVersionMinor
-										***************************************/
+                                        /***************************************
+                                        * pjPath_GetVersionMinor
+                                        ***************************************/
 int pjPath_GetVersionMinor( void ){
 	return PJPATH_VERSION_MINOR;	
 }
-										/***************************************
-										* pjPath_GetVersionMajor
-										***************************************/
+                                        /***************************************
+                                        * pjPath_GetVersionMajor
+                                        ***************************************/
 int pjPath_GetVersionMajor( void ){
 	return PJPATH_VERSION_MAJOR;	
 }
-										/***************************************
-										* pjPath_GetVersion
-										***************************************/
+                                        /***************************************
+                                        * pjPath_GetVersion
+                                        ***************************************/
 long int pjPath_GetVersion( void ){
 	return (PJPATH_VERSION_MAJOR<<16) | (PJPATH_VERSION_MINOR<<8) | PJPATH_VERSION_PATCH;	
 }
@@ -134,6 +134,31 @@ int pjPath_GetFileExtension( char* path, char* fileExt ){
 		p++;	
 	}
 	*fe = '\0';
+	
+	return 1;
+}
+                                        /***************************************
+                                        * pjPath_GetFileNameWithoutExtension
+                                        ***************************************/
+int pjPath_GetFileNameWithoutExtension( char* path, char* fileName ){
+    char* p = path;
+	char* fn = fileName;
+	
+	p += strlen( path );
+	while( *p != '\\' && (p > path) ){
+		p--;
+	}
+	
+	if( p == path )
+		return 0;
+	
+	p++;
+	while( *p != '.' ){
+		*fn = *p;
+		p++;
+		fn++;
+	}
+	*fn = '\0';
 	
 	return 1;
 }

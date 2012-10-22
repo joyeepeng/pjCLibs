@@ -2,7 +2,12 @@
 #include <stdlib.h>
 
 //#define __DEBUG_PJPATH__
-#define __DEBUG_PJSTRING__
+//#define __DEBUG_PJSTRING__
+#define __DEBUG_PJTEXTREADER__
+
+#ifdef __DEBUG_PJTEXTREADER__
+#include "pjTextReader.h"
+#endif
 
 #ifdef __DEBUG_PJPATH__
 #include "pjPath.h"
@@ -14,6 +19,13 @@
 
 int main(int argc, char *argv[])
 {
+#ifdef __DEBUG_PJTEXTREADER__
+    long int version = pjTextReader_GetVersion();
+    printf("pjTextReader Version: %ld.%d.%d\n", version>>16&0xff, version>>8&0xff, version&0xff);
+    printf("pjTextReader Version: %d.%d.%d\n", pjTextReader_GetVersionMajor(),pjTextReader_GetVersionMinor(),pjTextReader_GetVersionPatch());
+    
+#endif
+
 #ifdef __DEBUG_PJPATH__
 	long int version = pjPath_GetVersion();
 	printf("pjPath Version: %ld.%d.%d\n", version>>16&0xff, version>>8&0xff, version&0xff);
@@ -30,12 +42,18 @@ int main(int argc, char *argv[])
 	char fileName[12];
 	pjPath_GetFileName("C:\\pengjun\\a\\b\\c\\defs.sdf",fileName);
 	printf("FileName: %s\n", fileName);
+	pjPath_GetFileNameWithoutExtension("C:\\pengjun\\a\\dsf.dd",fileName);
+	printf("FileName: %s\n", fileName);
 	
 	pjPath_GetDriveName("C:\\pengjun\\abc\\dedfs.dff",fileName);
 	printf("DriveName: %s\n", fileName);
 #endif
 
 #ifdef __DEBUG_PJSTRING__
+    long int version = pjString_GetVersion();
+	printf("pjString Version: %ld.%d.%d\n", version>>16&0xff, version>>8&0xff, version&0xff);
+	printf("pjString Version: %d.%d.%d\n", pjString_GetVersionMajor(), pjString_GetVersionMinor(), pjString_GetVersionPatch() );
+	
 	char* testString = "abcd1389c";
 	printf("Length: %d\n", pjString_Length(testString) );
 	printf("Find: %d\n", pjString_Find(testString,'1'));

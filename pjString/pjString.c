@@ -16,25 +16,25 @@
             8-bits 8-bits 8-bits
 *******************************************************************************/
 										/***************************************
-										* pjPath_GetVersionPatch
+										* pjString_GetVersionPatch
 										***************************************/
 int pjString_GetVersionPatch( void ){
 	return PJSTRING_VERSION_PATCH;	
 }
 										/***************************************
-										* pjPath_GetVersionMinor
+										* pjString_GetVersionMinor
 										***************************************/
 int pjString_GetVersionMinor( void ){
 	return PJSTRING_VERSION_MINOR;	
 }
 										/***************************************
-										* pjPath_GetVersionMajor
+										* pjString_GetVersionMajor
 										***************************************/
 int pjString_GetVersionMajor( void ){
 	return PJSTRING_VERSION_MAJOR;	
 }
 										/***************************************
-										* pjPath_GetVersion
+										* pjString_GetVersion
 										***************************************/
 long int pjString_GetVersion( void ){
 	return (PJSTRING_VERSION_MAJOR<<16) | (PJSTRING_VERSION_MINOR<<8) | PJSTRING_VERSION_PATCH;	

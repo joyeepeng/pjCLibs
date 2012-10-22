@@ -29,6 +29,7 @@ int pjPath_GetVersionMajor( void );
 int pjPath_GetFileExtension( char* path, char* fileExt );
 int pjPath_GetDirectoryName( char* path, char* directoryName );
 int pjPath_GetFileName( char* path, char* fileName );
+int pjPath_GetFileNameWithoutExtension( char* path, char* fileName );
 int pjPath_GetDriveName( char* path, char* drive );
 
 #endif
