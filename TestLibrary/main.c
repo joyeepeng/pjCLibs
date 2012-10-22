@@ -24,6 +24,21 @@ int main(int argc, char *argv[])
     printf("pjTextReader Version: %ld.%d.%d\n", version>>16&0xff, version>>8&0xff, version&0xff);
     printf("pjTextReader Version: %d.%d.%d\n", pjTextReader_GetVersionMajor(),pjTextReader_GetVersionMinor(),pjTextReader_GetVersionPatch());
     
+    pjTextReader* textReader = (pjTextReader*)malloc(sizeof(pjTextReader));
+    char line[9];
+    pjTextReader_OpenFile( textReader, "a.txt" );
+    printf("GetLineNumber: %d\n", pjTextReader_GetLineNumber( textReader ) );
+    printf("MaxLineLength: %d\n", pjTextReader_GetMaxLineLength( textReader ) );
+    pjTextReader_ReadChars( textReader, 6, line);
+    printf("ReadChars: %s\n", line);
+    pjTextReader_ReadLine( textReader, line );
+    printf("ReadLine: %s\n", line );
+    pjTextReader_ReadLine( textReader, line );
+    printf("ReadLine: %s\n", line );
+    pjTextReader_ReadLine( textReader, line );
+    printf("ReadLine: %s\n", line );
+    pjTextReader_CloseFile( textReader );
+    free(textReader );
 #endif
 
 #ifdef __DEBUG_PJPATH__
