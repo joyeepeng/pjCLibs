@@ -1,0 +1,31 @@
+# Project: pjJpegFile
+# Makefile created by Dev-C++ 4.9.9.2
+
+CPP  = g++.exe
+CC   = gcc.exe
+WINDRES = windres.exe
+RES  = 
+OBJ  = pjJpegFile.o $(RES)
+LINKOBJ  = pjJpegFile.o $(RES)
+LIBS =  -L"D:/Program Files/Dev-Cpp/lib" -L"C:/Users/Administrator/Documents/GitHub/pjCLibs/pjJpegFile/libjpeg/lib" libjpeg/lib/libjpeg.dll.a  
+INCS =  -I"D:/Program Files/Dev-Cpp/include"  -I"C:/Users/Administrator/Documents/GitHub/pjCLibs/pjJpegFile/libjpeg/include" 
+CXXINCS =  -I"D:/Program Files/Dev-Cpp/lib/gcc/mingw32/3.4.2/include"  -I"D:/Program Files/Dev-Cpp/include/c++/3.4.2/backward"  -I"D:/Program Files/Dev-Cpp/include/c++/3.4.2/mingw32"  -I"D:/Program Files/Dev-Cpp/include/c++/3.4.2"  -I"D:/Program Files/Dev-Cpp/include"  -I"C:/Users/Administrator/Documents/GitHub/pjCLibs/pjJpegFile/libjpeg/include" 
+BIN  = pjJpegFile.a
+CXXFLAGS = $(CXXINCS)   -ansi
+CFLAGS = $(INCS)   -ansi
+RM = rm -f
+
+.PHONY: all all-before all-after clean clean-custom
+
+all: all-before pjJpegFile.a all-after
+
+
+clean: clean-custom
+	${RM} $(OBJ) $(BIN)
+
+$(BIN): $(LINKOBJ)
+	ar r $(BIN) $(LINKOBJ)
+	ranlib $(BIN)
+
+pjJpegFile.o: pjJpegFile.c
+	$(CC) -c pjJpegFile.c -o pjJpegFile.o $(CFLAGS)

@@ -4,7 +4,12 @@
 //#define __DEBUG_PJPATH__
 //#define __DEBUG_PJSTRING__
 //#define __DEBUG_PJTEXTREADER__
-#define __DEBUG_PJTEXTWRITER__
+//#define __DEBUG_PJTEXTWRITER__
+#define __DEBUG_PJJPEGFILE__
+
+#ifdef __DEBUG_PJJPEGFILE__
+#include "pjJpegFile.h"
+#endif
 
 #ifdef __DEBUG_PJTEXTWRITER__
 #include "pjTextWriter.h"
@@ -24,6 +29,12 @@
 
 int main(int argc, char *argv[])
 {
+#ifdef __DEBUG_PJJPEGFILE__
+    long int version = pjJpegFile_GetVersion();
+    printf("pjJpegFile Version: %d.%d.%d\n", version>>16&0xff, version>>8&0xff, version&0xff);
+    printf("pjJpegFile Version: %d.%d.%d\n", pjJpegFile_GetVersionMajor(), pjJpegFile_GetVersionMinor(), pjJpegFile_GetVersionPatch());
+#endif
+
 #ifdef __DEBUG_PJTEXTWRITER__
     long int version = pjTextWriter_GetVersion();
     printf("pjTextWriter Version: %d.%d.%d\n", version>>16&0xff, version>>8&0xff, version&0xff);

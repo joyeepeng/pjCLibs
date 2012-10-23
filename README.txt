@@ -51,3 +51,10 @@ pjCLibs Library
 - pjTextWriter_WriteChars( pjTextWriter* textWriter, char* writeChars )
 - pjTextWriter_WriteLine( pjTextWriter* textWriter, char* writeLine )
 - pjTextWriter_CloseFile( pjTextWriter* textWriter )
+
+5 pjJpegFile Class
+========================================================================
+- pjJpegFile_GetVersion( void )
+- pjJpegFile_GetVersionPatch( void )
+- pjJpegFile_GetVersionMinor( void )
+- pjJpegFile_GetVersionMajor( void )
