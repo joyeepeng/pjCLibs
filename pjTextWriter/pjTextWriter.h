@@ -12,6 +12,10 @@
 
 #include <stdio.h>
 
+typedef struct tagPjTextWriter{
+    FILE* fileHandle;
+}pjTextWriter;
+
 #define PJTEXTWRITER_VERSION_PATCH		1
 #define PJTEXTWRITER_VERSION_MINOR		0
 #define PJTEXTWRITER_VERSION_MAJOR		0
@@ -23,5 +27,13 @@ long int pjTextWriter_GetVersion( void );
 int pjTextWriter_GetVersionPatch( void );
 int pjTextWriter_GetVersionMinor( void );
 int pjTextWriter_GetVersionMajor( void );
+
+/*******************************************************************************
+* Public Methods
+*******************************************************************************/
+int pjTextWriter_OpenFile( pjTextWriter* textWriter, char* path );
+int pjTextWriter_WriteChars( pjTextWriter* textWriter, char* writeChars );
+int pjTextWriter_WriteLine( pjTextWriter* textWriter, char* writeLine );
+int pjTextWriter_CloseFile( pjTextWriter* textWriter );
 
 #endif

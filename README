@@ -40,3 +40,14 @@ pjCLibs Library
 - pjTextReader_ReadChars( pjTextReader* textReader, int length, char* line )
 - pjTextReader_ReadLine( pjTextReader* textReader, char* line )
 - pjTextReader_CloseFile( pjTextReader* textReader )
+
+4 pjTextWriter Class
+========================================================================
+- pjTextWriter_GetVersion( void )
+- pjTextWriter_GetVersionPatch( void )
+- pjTextWriter_GetVersionMinor( void )
+- pjTextWriter_GetVersionMajor( void )
+- pjTextWriter_OpenFile( pjTextWriter* textWriter, char* path )
+- pjTextWriter_WriteChars( pjTextWriter* textWriter, char* writeChars )
+- pjTextWriter_WriteLine( pjTextWriter* textWriter, char* writeLine )
+- pjTextWriter_CloseFile( pjTextWriter* textWriter )
