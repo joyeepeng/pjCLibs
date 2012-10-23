@@ -3,7 +3,12 @@
 
 //#define __DEBUG_PJPATH__
 //#define __DEBUG_PJSTRING__
-#define __DEBUG_PJTEXTREADER__
+//#define __DEBUG_PJTEXTREADER__
+#define __DEBUG_PJTEXTWRITER__
+
+#ifdef __DEBUG_PJTEXTWRITER__
+#include "pjTextWriter.h"
+#endif
 
 #ifdef __DEBUG_PJTEXTREADER__
 #include "pjTextReader.h"
@@ -19,6 +24,12 @@
 
 int main(int argc, char *argv[])
 {
+#ifdef __DEBUG_PJTEXTWRITER__
+    long int version = pjTextWriter_GetVersion();
+    printf("pjTextWriter Version: %d.%d.%d\n", version>>16&0xff, version>>8&0xff, version&0xff);
+    printf("pjTextWriter Version: %d.%d.%d\n", pjTextWriter_GetVersionMajor(), pjTextWriter_GetVersionMinor(), pjTextWriter_GetVersionPatch());
+#endif
+
 #ifdef __DEBUG_PJTEXTREADER__
     long int version = pjTextReader_GetVersion();
     printf("pjTextReader Version: %ld.%d.%d\n", version>>16&0xff, version>>8&0xff, version&0xff);
