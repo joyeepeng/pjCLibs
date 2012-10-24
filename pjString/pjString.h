@@ -32,5 +32,8 @@ int pjString_Copy( char* string, char* fromString );
 int pjString_CopyLimited( char* string, char* fromString, int length );
 int pjString_Append( char* string, char* append );
 int pjString_Substring( char* string, int start, int length, char* substring );
+int pjString_Equals( char* str1, char* str2 );
+int pjString_ToUpper( char* string );
+int pjString_ToLower( char* string );
 
 #endif

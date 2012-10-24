@@ -179,3 +179,61 @@ int pjString_Substring( char* string, int start, int length, char* substring ){
     
     return 1;
 }
+                                        /***************************************
+                                        * pjString_Equals
+                                        ***************************************/
+int pjString_Equals( char* str1, char* str2 ){
+    char* p = str1;
+    char* q = str2;
+    char* tmp = 0;
+    
+    int str1Len = pjString_Length( str1 );
+    int str2Len = pjString_Length( str2 );
+    
+    if( str1Len > str2Len ){
+        tmp = q;
+    }else{
+        tmp = p;   
+    }
+    
+    while( *tmp != '\0' ){
+        if( *p != *q ){
+            return 0;
+        }
+        p++;
+        q++;
+        tmp++;
+    }
+    
+    return 1;
+}
+                                        /***************************************
+                                        * pjString_ToUpper
+                                        ***************************************/
+int pjString_ToUpper( char* string ){
+    char* p = string;
+    
+    while( *p != '\0' ){
+        if( *p >= 'a' && *p <= 'z' ){
+            *p -= 32;   
+        }   
+        p++;
+    }
+    
+    return 1;
+}
+                                        /***************************************
+                                        * pjString_ToLower
+                                        ***************************************/
+int pjString_ToLower( char* string ){
+    char* p = string;
+    
+    while( *p != '\0' ){
+        if( *p >= 'A' && *p <= 'Z' ){
+            *p += 32;   
+        }
+        p++;
+    }
+    
+    return 1;
+}

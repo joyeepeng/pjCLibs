@@ -27,6 +27,9 @@ pjCLibs Library
 - pjString_CopyLimited( char* string, char* fromString, int length )
 - pjString_Append( char* string, char* append )
 - pjString_Substring( char* string, int start, int length, char* substring )
+- pjString_Equals( char* str1, char* str2 )
+- pjString_ToUpper( char* string )
+- pjString_ToLower( char* string )
 
 3 pjTextReader Class
 ========================================================================
