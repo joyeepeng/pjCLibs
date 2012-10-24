@@ -58,3 +58,13 @@ pjCLibs Library
 - pjJpegFile_GetVersionPatch( void )
 - pjJpegFile_GetVersionMinor( void )
 - pjJpegFile_GetVersionMajor( void )
+- pjJpegFile_ReadFile( char* fileName, pjJpegFile* jpegFile )
+- pjJpegFile_WriteFile( const pjJpegFile* jpegFile, char* fileName, int quality );
+- pjJpegFile_GetPixel( const pjJpegFile* jpegFile, unsigned int row, unsigned int col );
+- pjJpegFile_SetPixel( pjJpegFile* jpegFile, unsigned int row, unsigned int col, pjJpegColor clr );
+- pjJpegFile_SetRegionColor( pjJpegFile* jpegFile, unsigned int x, 
+                                unsigned int y, 
+                                unsigned int width, 
+                                unsigned int height, 
+                                pjJpegColor clr );
+- pjJpegFile_Dispose( pjJpegFile* jpegFile );
