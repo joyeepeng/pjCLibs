@@ -1,11 +1,17 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <conio.h>
 
 //#define __DEBUG_PJPATH__
 //#define __DEBUG_PJSTRING__
 //#define __DEBUG_PJTEXTREADER__
 //#define __DEBUG_PJTEXTWRITER__
-#define __DEBUG_PJJPEGFILE__
+//#define __DEBUG_PJJPEGFILE__
+#define __DEBUG_PJSERIALPORT__
+
+#ifdef __DEBUG_PJSERIALPORT__
+#include "pjSerialPort.h"
+#endif
 
 #ifdef __DEBUG_PJJPEGFILE__
 #include "pjJpegFile.h"
@@ -27,8 +33,52 @@
 #include "pjString.h"
 #endif
 
+#ifdef __DEBUG_PJSERIALPORT__
+void SendDataWithLineEnd( void ){
+    char send[25];
+    printf("Send String: ");  
+    scanf("%s", send);
+    pjSerialPort_WriteLine( send );
+}
+
+void SendData( void ){
+    char send[25];
+    printf("Send String: ");  
+    scanf("%s", send);
+    pjSerialPort_WriteData( send ); 
+}
+
+void Exit( void ){
+    pjSerialPort_ClosePort();
+    exit(0);   
+}
+#endif
+
 int main(int argc, char *argv[])
 {
+#ifdef __DEBUG_PJSERIALPORT__
+    long int version = pjSerialPort_GetVersion();
+    printf("pjSerialPort Ver: %d.%d.%d\n", version>>16&0xff, version>>8&0xff, version&0xff);
+    printf("pjSerialPort Ver: %d.%d.%d\n", pjSerialPort_GetVersionMajor(), pjSerialPort_GetVersionMinor(), pjSerialPort_GetVersionPatch());
+    
+    pjSerialPort_Initialize();
+    pjSerialPort_OpenPort( 4, 115200, 0, 8, 0 );
+    pjSerialPort_Callback* callbacks = (pjSerialPort_Callback*)malloc(sizeof(pjSerialPort_Callback)*3);
+    callbacks[0] = SendDataWithLineEnd;
+    callbacks[1] = SendData;
+    callbacks[2] = Exit;
+    if( pjSerialPort_IsOpened() ){
+        printf("open port passed.\n");
+        while( !kbhit() ){
+            printf("%s", pjSerialPort_ReadLineWithCallbacks( "sge", callbacks ) );   
+        }
+        pjSerialPort_ClosePort();
+    }else{
+        printf("open port failed.\n");
+    }
+    free( callbacks );
+#endif
+
 #ifdef __DEBUG_PJJPEGFILE__
     if( pjJpegFile_IsLibJpegExist() ){
         long int version = pjJpegFile_GetVersion();

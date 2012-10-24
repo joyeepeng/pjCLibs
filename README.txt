@@ -68,3 +68,24 @@ pjCLibs Library
                                 unsigned int height, 
                                 pjJpegColor clr );
 - pjJpegFile_Dispose( pjJpegFile* jpegFile );
+
+6 pjSerialPort Class
+========================================================================
+- pjSerialPort_GetVersion( void )
+- pjSerialPort_GetVersionPatch( void )
+- pjSerialPort_GetVersionMinor( void )
+- pjSerialPort_GetVersionMajor( void )
+- pjSerialPort_Initialize( void )
+- pjSerialPort_OpenPort( int port, int baud_rate, int parity, int data_bits,
+                           int stop_bits )
+- pjSerialPort_ClosePort( void )
+- pjSerialPort_ReadData( void* data, int length )
+- pjSerialPort_WriteData( const char* data )
+- pjSerialPort_BytesToRead( void )
+- pjSerialPort_IsOpened( void )
+- pjSerialPort_WriteChar( char ch )
+- pjSerialPort_WriteLine( const char* line )
+- pjSerialPort_ReadLine( void )
+- pjSerialPort_ReadLineWithInterrupt( int pressKeyExit )
+- pjSerialPort_ReadLineWithCallback( char key, pjSerialPort_Callback callback )
+- pjSerialPort_ReadLineWithCallbacks( char* keys, pjSerialPort_Callback* callbacks )
