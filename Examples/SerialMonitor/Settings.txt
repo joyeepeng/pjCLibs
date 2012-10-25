@@ -1,0 +1,7 @@
+1,115200,8,0,0
+
+1      - COM1
+115200 - BaudRate
+8      - DataBits
+0      - StopBits(0 - 1Bit, 1 - 1.5Bit, 2 - 2Bits)
+0      - Parity(0 - None, 1- Odd, 2 - Even, 3 - Space, 4 - Mark)

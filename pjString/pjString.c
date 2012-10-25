@@ -43,9 +43,9 @@ long int pjString_GetVersion( void ){
 * Public Methods
 *******************************************************************************/
 										/***************************************
-										* pjString_Find
+										* pjString_Find2
 										***************************************/
-int pjString_Find( char* string, char findChar ){
+int pjString_Find2( char* string, char findChar ){
 	char* p = string;
 	int pos = 0;
 	while( *p != '\0' ){
@@ -57,9 +57,9 @@ int pjString_Find( char* string, char findChar ){
 	return (*p == '\0') ? -1 : pos;
 }
                                         /***************************************
-                                        * pjString_FindAll
+                                        * pjString_FindAll2
                                         ***************************************/
-int pjString_FindAll( char* string, char findChar, int* pos ){
+int pjString_FindAll2( char* string, char findChar, int* pos ){
     char* p = string;
     int* q = pos;
     int isFind = 0;
@@ -78,9 +78,9 @@ int pjString_FindAll( char* string, char findChar, int* pos ){
     return isFind;
 }
 										/***************************************
-										* pjString_Length
+										* pjString_Length2
 										***************************************/
-int pjString_Length( char* string ){
+int pjString_Length2( char* string ){
 	char* p = string;
 	int length = 0;
 	while( *p != '\0' ) {
@@ -90,9 +90,9 @@ int pjString_Length( char* string ){
 	return length;
 }
                                         /***************************************
-                                        * pjString_Replace
+                                        * pjString_Replace2
                                         ***************************************/
-int pjString_Replace( char* string, char oldChar, char newChar ){
+int pjString_Replace2( char* string, char oldChar, char newChar ){
     char* p = string;
     int isFindChar = 0;
     while( *p != '\0' ){
@@ -106,9 +106,9 @@ int pjString_Replace( char* string, char oldChar, char newChar ){
     return isFindChar;
 }
                                         /***************************************
-                                        * pjString_Copy
+                                        * pjString_Copy2
                                         ***************************************/
-int pjString_Copy( char* string, char* fromString ){
+int pjString_Copy2( char* string, char* fromString ){
     char* p = string;
     char* q = fromString;
     
@@ -122,9 +122,9 @@ int pjString_Copy( char* string, char* fromString ){
     return 1;
 }
                                         /***************************************
-                                        * pjString_CopyLimited
+                                        * pjString_CopyLimited2
                                         ***************************************/
-int pjString_CopyLimited( char* string, char* fromString, int length ){
+int pjString_CopyLimited2( char* string, char* fromString, int length ){
     char* p = string;
     char* q = fromString;
     int copyed = 0;
@@ -140,10 +140,10 @@ int pjString_CopyLimited( char* string, char* fromString, int length ){
     return 1;
 }
                                         /***************************************
-                                        * pjString_Append
+                                        * pjString_Append2
                                         ***************************************/
-int pjString_Append( char* string, char* append ){
-    char* p = string + pjString_Length( string );
+int pjString_Append2( char* string, char* append ){
+    char* p = string + pjString_Length2( string );
     char* q = append;
     
     while( *q != '\0' ){
@@ -156,9 +156,9 @@ int pjString_Append( char* string, char* append ){
     return 1;
 }
                                         /***************************************
-                                        * pjString_Substring
+                                        * pjString_Substring2
                                         ***************************************/
-int pjString_Substring( char* string, int start, int length, char* substring ){
+int pjString_Substring2( char* string, int start, int length, char* substring ){
     char* p = string;
     char* q = substring;
     int pos = 0;
@@ -180,15 +180,15 @@ int pjString_Substring( char* string, int start, int length, char* substring ){
     return 1;
 }
                                         /***************************************
-                                        * pjString_Equals
+                                        * pjString_Equals2
                                         ***************************************/
-int pjString_Equals( char* str1, char* str2 ){
+int pjString_Equals2( char* str1, char* str2 ){
     char* p = str1;
     char* q = str2;
     char* tmp = 0;
     
-    int str1Len = pjString_Length( str1 );
-    int str2Len = pjString_Length( str2 );
+    int str1Len = pjString_Length2( str1 );
+    int str2Len = pjString_Length2( str2 );
     
     if( str1Len > str2Len ){
         tmp = q;
@@ -208,9 +208,9 @@ int pjString_Equals( char* str1, char* str2 ){
     return 1;
 }
                                         /***************************************
-                                        * pjString_ToUpper
+                                        * pjString_ToUpper2
                                         ***************************************/
-int pjString_ToUpper( char* string ){
+int pjString_ToUpper2( char* string ){
     char* p = string;
     
     while( *p != '\0' ){
@@ -223,9 +223,9 @@ int pjString_ToUpper( char* string ){
     return 1;
 }
                                         /***************************************
-                                        * pjString_ToLower
+                                        * pjString_ToLower2
                                         ***************************************/
-int pjString_ToLower( char* string ){
+int pjString_ToLower2( char* string ){
     char* p = string;
     
     while( *p != '\0' ){
@@ -236,4 +236,167 @@ int pjString_ToLower( char* string ){
     }
     
     return 1;
+}
+                                        /***************************************
+                                        * pjString_Split2
+                                        ***************************************/
+int pjString_Split2( char* string, char splitChar, char** parts ){
+    char* str = string;
+    char** part = parts;
+    char* p = *(part);
+    
+    while( *str != '\0' ){
+        if( *str != splitChar ){
+            *p = *str;
+            str++;   
+            p++;
+        }else{
+            *p = '\0';
+            p =  *(++part);
+            str++;
+        }
+    }
+    
+    *p = '\0';
+    
+    return 1;
+}
+                                        /***************************************
+                                        * pjString_New
+                                        ***************************************/
+pjString* pjString_New( int length ){
+    pjString* string = (pjString*)malloc( sizeof(pjString) );
+    string->string = (char*)malloc( sizeof(char) * (length + 1) );
+    return string;
+}
+                                        /***************************************
+                                        * pjString_Delete
+                                        ***************************************/
+void pjString_Delete( pjString* string ){
+    if( string != 0 ){
+        if( string->string != 0 ){
+            free( string->string );
+            string->string = 0;    
+        }
+        
+        free( string );
+        string = 0;   
+    }   
+}
+                                        /***************************************
+                                        * pjString_Copy
+                                        ***************************************/
+int pjString_Copy( pjString* string, char* fromString ){
+    if( string == 0 ) return;
+    
+    return pjString_Copy2( string->string, fromString );
+}
+                                        /***************************************
+                                        * pjString_ToString
+                                        ***************************************/
+char* pjString_ToString( pjString* string ){
+    return string->string;   
+}
+
+                                        /***************************************
+                                        * pjString_Find
+                                        ***************************************/
+int pjString_Find( pjString* string, char findChar ){
+    if( string == 0 ) return -1;
+    
+    return pjString_Find2( string->string, findChar );   
+}
+                                        /***************************************
+                                        * pjString_FindAll
+                                        ***************************************/
+int pjString_FindAll( pjString* string, char findChar, int* pos ){
+    if( string == 0 ) return -1;
+    
+    return pjString_FindAll2( string->string, findChar, pos );
+}
+                                        /***************************************
+                                        * pjString_Replace
+                                        ***************************************/
+int pjString_Replace( pjString* string, char oldChar, char newChar ){
+    if( string == 0 ) return -1;
+    
+    return pjString_Replace2( string->string, oldChar, newChar );
+}
+                                        /***************************************
+                                        * pjString_CopyLimited
+                                        ***************************************/   
+int pjString_CopyLimited( pjString* string, char* fromString, int length ){
+    if( string == 0 ) return -1;
+    
+    return pjString_CopyLimited2( string->string, fromString, length );
+}
+                                        /***************************************
+                                        * pjString_Append
+                                        ***************************************/
+int pjString_Append( pjString* string, char* append ){
+    if( string == 0 ) return -1;
+    
+    return pjString_Append2( string->string, append );
+}
+                                        /***************************************
+                                        * pjString_Substring
+                                        ***************************************/
+int pjString_Substring( pjString* string, int start, int length, char* substring ){
+    if( string == 0 ) return -1;
+    
+    return pjString_Substring2( string->string, start, length, substring );
+}
+                                        /***************************************
+                                        * pjString_Equals
+                                        ***************************************/
+int pjString_Equals( pjString* string1, pjString* string2 ){
+    if( string1 == 0 || string2 == 0 ) return -1;
+    
+    return pjString_Equals2( string1->string, string2->string );
+}
+                                        /***************************************
+                                        * pjString_ToUpper
+                                        ***************************************/
+int pjString_ToUpper( pjString* string ){
+    if( string == 0 ) return -1;
+    
+    return pjString_ToUpper2( string->string );
+}
+                                        /***************************************
+                                        * pjString_ToLower
+                                        ***************************************/
+int pjString_ToLower( pjString* string ){
+    if( string == 0 ) return -1;
+    
+    return pjString_ToLower2( string->string );
+}
+                                        /***************************************
+                                        * pjString_Split
+                                        ***************************************/
+int pjString_Split( pjString* string, char splitChar, pjString** parts ){
+    char* str = string->string;
+    pjString** part = parts;
+    char* p = (*(part))->string;
+    
+    while( *str != '\0' ){
+        if( *str != splitChar ){
+            *p = *str;
+            str++;   
+            p++;
+        }else{
+            *p = '\0';
+            p =  (*(++part))->string;
+            str++;
+        }
+    }
+    
+    *p = '\0';
+    
+    return 1;
+}
+                                        /***************************************
+                                        * pjString_ToInteger
+                                        ***************************************/
+int pjString_ToInteger( pjString* string ){
+    return atoi( string->string );
 }
