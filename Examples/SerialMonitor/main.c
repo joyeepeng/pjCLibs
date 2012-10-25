@@ -44,25 +44,29 @@ void Exit( void ){
 }
 
 void read_settings(){
-    pjTextReader* textReader = (pjTextReader*)malloc( sizeof(pjTextReader) );
+    pjTextReader* textReader = pjTextReader_New();
     pjString* line = pjString_New( 128 );
     pjString* parts[5];
     int i = 0;
     
     for(i=0;i<5;i++) parts[i] = pjString_New( 7 );
-    
-    pjTextReader_OpenFile( textReader, "Setting.txt" );
-    pjTextReader_ReadLine( textReader, line->string );
-    pjTextReader_CloseFile( textReader );
+    if( pjTextReader_IsExist( "Settings.txt" ) ){
+        pjTextReader_OpenFile( textReader, "Settings.txt" );
+        pjTextReader_ReadLine( textReader, pjString_ToString(line) );
+        pjTextReader_CloseFile( textReader );
+            
+        pjString_Split( line, ',', parts );
         
-    pjString_Split( line, ',', parts );
-    g_port = pjString_ToInteger( parts[0] );
-    g_baud_rate = pjString_ToInteger( parts[1] );
-    g_data_bits = pjString_ToInteger( parts[2] );
-    g_stop_bits = pjString_ToInteger( parts[3] );
-    g_parity = pjString_ToInteger( parts[4] );
+        g_port = pjString_ToInteger( parts[0] );
+        g_baud_rate = pjString_ToInteger( parts[1] );
+        g_data_bits = pjString_ToInteger( parts[2] );
+        g_stop_bits = pjString_ToInteger( parts[3] );
+        g_parity = pjString_ToInteger( parts[4] );
+    }
 
     for(i=0;i<5;i++) pjString_Delete(parts[i]);
+    pjString_Delete(line);
+    pjTextReader_Delete( textReader );
 }
 
 int main(int argc, char *argv[])

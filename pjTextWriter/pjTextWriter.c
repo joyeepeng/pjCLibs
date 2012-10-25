@@ -97,3 +97,18 @@ int pjTextWriter_WriteLine( pjTextWriter* textWriter, char* writeLine ){
     
     return 1;
 }
+                                        /***************************************
+                                        * pjTextWriter_New
+                                        ***************************************/
+pjTextWriter* pjTextWriter_New( void ){
+    return (pjTextWriter*)malloc( sizeof(pjTextWriter) );
+}
+                                        /***************************************
+                                        * pjTextWriter_Delete
+                                        ***************************************/
+void pjTextWriter_Delete( pjTextWriter* textWriter ){
+    if( textWriter != 0 ){
+        free( textWriter );
+        textWriter = 0;   
+    }   
+}

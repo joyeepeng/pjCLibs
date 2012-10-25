@@ -52,6 +52,8 @@ int pjJpegFile_GetVersionMajor( void );
 /*******************************************************************************
 * Public Methods
 *******************************************************************************/
+pjJpegFile* pjJpegFile_New();
+void pjJpegFile_Delete( pjJpegFile* jpegFile );
 int pjJpegFile_ReadFile( char* fileName, pjJpegFile* jpegFile );
 int pjJpegFile_WriteFile( const pjJpegFile* jpegFile, char* fileName, int quality );
 pjJpegColor pjJpegFile_GetPixel( const pjJpegFile* jpegFile, unsigned int row, unsigned int col );
@@ -61,6 +63,5 @@ void pjJpegFile_SetRegionColor( pjJpegFile* jpegFile, unsigned int x,
                                 unsigned int width, 
                                 unsigned int height, 
                                 pjJpegColor clr );
-void pjJpegFile_Dispose( pjJpegFile* jpegFile );
 
 #endif

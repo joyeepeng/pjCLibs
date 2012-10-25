@@ -155,3 +155,30 @@ int pjTextReader_ReadLine( pjTextReader* textReader, char* line ){
     
     return 1;
 }
+                                        /***************************************
+                                        * pjTextReader_New
+                                        ***************************************/
+pjTextReader* pjTextReader_New( void ){
+    return (pjTextReader*)malloc( sizeof( pjTextReader) );
+}
+                                        /***************************************
+                                        * pjTextReader_Delete
+                                        ***************************************/
+void pjTextReader_Delete( pjTextReader* textReader ){
+    if( textReader != 0 ){
+        free( textReader );
+        textReader = 0; 
+    }
+}
+                                        /***************************************
+                                        * pjTextReader_IsExist
+                                        ***************************************/
+int pjTextReader_IsExist( char* path ){
+    FILE* fp = fopen( path, "r" );
+    if( fp != 0 ){
+        fclose( fp );
+        return 1;
+    }
+    
+    return 0;
+}

@@ -31,6 +31,8 @@ int pjTextWriter_GetVersionMajor( void );
 /*******************************************************************************
 * Public Methods
 *******************************************************************************/
+pjTextWriter* pjTextWriter_New( void );
+void pjTextWriter_Delete( pjTextWriter* textWriter );
 int pjTextWriter_OpenFile( pjTextWriter* textWriter, char* path );
 int pjTextWriter_WriteChars( pjTextWriter* textWriter, char* writeChars );
 int pjTextWriter_WriteLine( pjTextWriter* textWriter, char* writeLine );

@@ -31,6 +31,9 @@ int pjTextReader_GetVersionMajor( void );
 /*******************************************************************************
 * Public Methods
 *******************************************************************************/
+pjTextReader* pjTextReader_New( void );
+void pjTextReader_Delete( pjTextReader* textReader );
+int pjTextReader_IsExist( char* path );
 int pjTextReader_OpenFile( pjTextReader* textReader, char* path );
 int pjTextReader_GetLineNumber( pjTextReader* textReader );
 int pjTextReader_GetMaxLineLength( pjTextReader* textReader );

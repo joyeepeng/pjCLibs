@@ -3,9 +3,9 @@
 #include <conio.h>
 
 //#define __DEBUG_PJPATH__
-#define __DEBUG_PJSTRING__
+//#define __DEBUG_PJSTRING__
 //#define __DEBUG_PJTEXTREADER__
-//#define __DEBUG_PJTEXTWRITER__
+#define __DEBUG_PJTEXTWRITER__
 //#define __DEBUG_PJJPEGFILE__
 //#define __DEBUG_PJSERIALPORT__
 
@@ -80,12 +80,11 @@ int main(int argc, char *argv[])
 #endif
 
 #ifdef __DEBUG_PJJPEGFILE__
-    if( pjJpegFile_IsLibJpegExist() ){
         long int version = pjJpegFile_GetVersion();
         printf("pjJpegFile Version: %d.%d.%d\n", version>>16&0xff, version>>8&0xff, version&0xff);
         printf("pjJpegFile Version: %d.%d.%d\n", pjJpegFile_GetVersionMajor(), pjJpegFile_GetVersionMinor(), pjJpegFile_GetVersionPatch());
         
-        pjJpegFile* jpegFile = (pjJpegFile*)malloc(sizeof(pjJpegFile));
+        pjJpegFile* jpegFile = pjJpegFile_New();
     
         pjJpegFile_ReadFile( "flower.jpg", jpegFile );
         int c = 0, r = 0;
@@ -103,11 +102,8 @@ int main(int argc, char *argv[])
         pjJpegFile_SetPixel( jpegFile, 20, 20, clr );
         pjJpegFile_WriteFile( jpegFile, "flower2.jpg", 75 );
         
-        pjJpegFile_Dispose( jpegFile );
+        pjJpegFile_Delete( jpegFile );
         free(jpegFile);
-    }else{
-        printf("jpeg62.dll is not exist.\n");  
-    }
 #endif
 
 #ifdef __DEBUG_PJTEXTWRITER__
@@ -115,7 +111,7 @@ int main(int argc, char *argv[])
     printf("pjTextWriter Version: %d.%d.%d\n", version>>16&0xff, version>>8&0xff, version&0xff);
     printf("pjTextWriter Version: %d.%d.%d\n", pjTextWriter_GetVersionMajor(), pjTextWriter_GetVersionMinor(), pjTextWriter_GetVersionPatch());
     
-    pjTextWriter* textWriter = (pjTextWriter*)malloc(sizeof(pjTextWriter));
+    pjTextWriter* textWriter = pjTextWriter_New();
     char buffer[8] = "dded";
     
     pjTextWriter_OpenFile( textWriter, "C:\\a.txt" );
@@ -124,8 +120,7 @@ int main(int argc, char *argv[])
     pjTextWriter_WriteLine( textWriter, "123");
     pjTextWriter_CloseFile( textWriter );
     
-    free(textWriter);
-    textWriter = NULL;
+    pjTextWriter_Delete( textWriter );
 #endif
 
 #ifdef __DEBUG_PJTEXTREADER__
@@ -133,9 +128,9 @@ int main(int argc, char *argv[])
     printf("pjTextReader Version: %ld.%d.%d\n", version>>16&0xff, version>>8&0xff, version&0xff);
     printf("pjTextReader Version: %d.%d.%d\n", pjTextReader_GetVersionMajor(),pjTextReader_GetVersionMinor(),pjTextReader_GetVersionPatch());
     
-    pjTextReader* textReader = (pjTextReader*)malloc(sizeof(pjTextReader));
-    char line[9];
-    pjTextReader_OpenFile( textReader, "a.txt" );
+    pjTextReader* textReader = pjTextReader_New();
+    char line[19];
+    pjTextReader_OpenFile( textReader, "Settings.txt" );
     printf("GetLineNumber: %d\n", pjTextReader_GetLineNumber( textReader ) );
     printf("MaxLineLength: %d\n", pjTextReader_GetMaxLineLength( textReader ) );
     pjTextReader_ReadChars( textReader, 6, line);
@@ -147,7 +142,7 @@ int main(int argc, char *argv[])
     pjTextReader_ReadLine( textReader, line );
     printf("ReadLine: %s\n", line );
     pjTextReader_CloseFile( textReader );
-    free(textReader );
+    pjTextReader_Delete( textReader );
 #endif
 
 #ifdef __DEBUG_PJPATH__

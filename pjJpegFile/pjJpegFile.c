@@ -215,11 +215,22 @@ void pjJpegFile_SetRegionColor( pjJpegFile* jpegFile, unsigned int x,
 	}                         
 }
                                         /***************************************
-                                        * pjJpegFile_Dispose
+                                        * pjJpegFile_New
                                         ***************************************/
-void pjJpegFile_Dispose( pjJpegFile* jpegFile ){
-    if( jpegFile->Pixels != NULL ){
-       free(jpegFile->Pixels);
-	   jpegFile->Pixels = 0;
-    }
+pjJpegFile* pjJpegFile_New(){
+    return (pjJpegFile*)malloc( sizeof(pjJpegFile) );
+}
+                                        /***************************************
+                                        * pjJpegFile_Delete
+                                        ***************************************/
+void pjJpegFile_Delete( pjJpegFile* jpegFile ){
+    if( jpegFile != 0 ){
+        if( jpegFile->Pixels != NULL ){
+           free(jpegFile->Pixels);
+    	   jpegFile->Pixels = 0;
+        }
+    
+        free( jpegFile );
+        jpegFile = 0;   
+    }   
 }
