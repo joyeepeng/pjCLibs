@@ -114,3 +114,13 @@ pjCLibs Library
 - pjSerialPort_ReadLineWithInterrupt( int pressKeyExit )
 - pjSerialPort_ReadLineWithCallback( char key, pjSerialPort_Callback callback )
 - pjSerialPort_ReadLineWithCallbacks( char* keys, pjSerialPort_Callback* callbacks )
+
+7 pjParallelPort Class
+========================================================================
+- pjParallelPort_GetVersion( void );
+- pjParallelPort_GetVersionPatch( void );
+- pjParallelPort_GetVersionMinor( void );
+- pjParallelPort_GetVersionMajor( void );
+- pjParallelPort_Output( int address, unsigned char value );
+- pjParallelPort_SetPinValue( int address, PARALLELPORT_PINS pin, 
+                                 PARALLELPORT_VALUES value );
